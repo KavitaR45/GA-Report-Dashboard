@@ -1,6 +1,6 @@
-"use client";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/ui/mode-toggle";
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs';
 import React from "react";
 
 function Navbar() {
@@ -11,7 +11,14 @@ function Navbar() {
           GA.
         </div>
         <div className="flex flex-1 justify-end gap-x-3">
-          <Button size='sm'>Log in</Button>
+          <SignedIn>
+            <UserButton afterSignOutUrl='/' />
+          </SignedIn>
+          <SignedOut>
+            <SignInButton mode='modal'>
+              <Button size='sm'>Log in</Button>
+            </SignInButton>
+          </SignedOut>
           <ModeToggle />
         </div>
       </nav>
